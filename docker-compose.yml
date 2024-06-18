@@ -1,0 +1,31 @@
+version: '3.9'
+
+services:
+  database:
+    image: postgres
+    container_name: database_ramen_go
+    restart: always
+    ports:
+      - 35025:35025
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=aeoSvykjnjNgIvUmOzYgemQCfKSezVLr
+      - POSTGRES_DB=railway
+    volumes:
+      - pgdata:/data/postgres
+
+  app:
+    build: .
+    container_name: ramen_go_api
+    ports:
+      - 5000:5000
+    volumes:
+      - .:/usr/app
+    links:
+      - database
+    depends_on:
+      - database
+
+volumes:
+  pgdata:
+    driver: local

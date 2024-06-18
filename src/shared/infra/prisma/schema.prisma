@@ -1,0 +1,33 @@
+generator client {
+  provider = "prisma-client-js"
+  binaryTargets = ["native", "linux-musl"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Broth {
+  id              Int @id @default(autoincrement())
+  imageInactive   String
+  imageActive     String
+  name            String
+  description     String
+  price           Float
+}
+
+model Protein {
+  id              Int @id @default(autoincrement())
+  imageInactive   String
+  imageActive     String
+  name            String
+  description     String
+  price           Float
+}
+
+model Order {
+  id              Int @id @default(autoincrement())
+  brothId   String
+  proteinId     String
+}
