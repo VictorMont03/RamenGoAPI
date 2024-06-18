@@ -9,6 +9,6 @@ const router = Router();
 
 router.use('/proteins', ensureAuthenticated, proteinRoutes);
 router.use('/broths', ensureAuthenticated, brothRoutes);
-router.use("/orders", ensureAuthenticated, orderRoutes);
+router.use("/order", ensureAuthenticated, orderRoutes);
 
 export { router }
