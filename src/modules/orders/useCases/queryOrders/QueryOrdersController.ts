@@ -9,7 +9,7 @@ class QueryOrdersController {
 
 		const orders = await queryUseCase.execute();
 
-		return res.status(201).json([...orders])
+		return res.status(200).json([...orders])
 	};
 
 

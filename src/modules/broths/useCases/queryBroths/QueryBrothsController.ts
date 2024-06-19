@@ -9,7 +9,7 @@ class QueryBrothsController {
 
 		const broths = await queryUseCase.execute();
 
-		return res.status(201).json([...broths])
+		return res.status(200).json([...broths])
 	};
 
 

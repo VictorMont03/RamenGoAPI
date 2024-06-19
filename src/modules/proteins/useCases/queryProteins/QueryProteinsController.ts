@@ -9,7 +9,7 @@ class QueryProteinsController {
 
 		const proteins = await queryUseCase.execute();
 
-		return res.status(201).json([...proteins])
+		return res.status(200).json([...proteins])
 	};
 
 
