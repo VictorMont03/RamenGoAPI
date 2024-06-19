@@ -11,12 +11,30 @@ const app = express();
 const port = 5000;
 
 app.use(cors());
+
+app.use((req: Request, res: Response, next: NextFunction) => {
+	if (req.is('text/plain')) {
+		let data = '';
+		req.on('data', chunk => {
+			data += chunk;
+		});
+		req.on('end', () => {
+			try {
+				req.body = JSON.parse(data);
+				next();
+			} catch (error) {
+				next(error);
+			}
+		});
+	} else {
+		next();
+	}
+});
+
 app.use(express.json());
 app.use(router);
 app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
 	if (err instanceof CelebrateError) {
-		console.log(`Body sent: ${JSON.stringify(req?.body)}`);
-
 		const errorBody = err.details.get('body');
 
 		return res.status(400).json({
